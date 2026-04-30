@@ -1,0 +1,40 @@
+{
+  targets: [
+    {
+      id: "st-001",
+      name: "Mike Wheeler",
+      signalClarity: 0.92,
+      duration: 185,
+      dimension: "hawkins",
+      lastKnownLocation: "Wheeler residence, Maple Street",
+      avatar: "https://raw.githubusercontent.com/niksumeiko/project-eleven/main/public/profiles/mike.png",
+    },
+    {
+      id: "st-002",
+      name: "Will Byers",
+      signalClarity: 0.41,
+      duration: 720,
+      dimension: "upside_down",
+      lastKnownLocation: "Castle Byers",
+      avatar: "https://raw.githubusercontent.com/niksumeiko/project-eleven/main/public/profiles/will.png",
+    },
+    {
+      id: "st-006",
+      name: "Dustin Henderson",
+      signalClarity: 0.95,
+      duration: 120,
+      dimension: "hawkins",
+      lastKnownLocation: "Henderson residence, Loch Nora",
+      avatar: "https://raw.githubusercontent.com/niksumeiko/project-eleven/main/public/profiles/dustin.png",
+    },
+    {
+      id: "st-008",
+      name: "Lucas Sinclair",
+      signalClarity: 0.79,
+      duration: 310,
+      dimension: "hawkins",
+      lastKnownLocation: "Hawkins Middle School",
+      avatar: "https://raw.githubusercontent.com/niksumeiko/project-eleven/main/public/profiles/lukas.png",
+    },
+  ]
+}
