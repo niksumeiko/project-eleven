@@ -5,7 +5,6 @@
   --foreground: #e8e8f0;
   --void-red: #c0392b;
   --void-red-glow: rgba(192, 57, 43, 0.4);
-  --void-dim: #1a1a2e;
   --void-border: rgba(255, 255, 255, 0.08);
   --card-bg: rgba(255, 255, 255, 0.03);
   --muted: rgba(255, 255, 255, 0.3);
@@ -19,6 +18,18 @@
   --badge-upside-bg: rgba(239, 68, 68, 0.08);
   --btn-border: rgba(255, 255, 255, 0.2);
   --btn-color: rgba(255, 255, 255, 0.7);
+  --status-connected-color: #27ae60;
+  --status-connected-glow: rgba(39, 174, 96, 0.5);
+  --status-connected-bg: rgba(39, 174, 96, 0.04);
+  --status-connected-border: rgba(39, 174, 96, 0.2);
+  --status-interference-color: #e67e22;
+  --status-interference-glow: rgba(230, 126, 34, 0.5);
+  --status-interference-bg: rgba(230, 126, 34, 0.04);
+  --status-interference-border: rgba(230, 126, 34, 0.2);
+  --status-lost-color: #c0392b;
+  --status-lost-glow: rgba(192, 57, 43, 0.6);
+  --status-lost-bg: rgba(192, 57, 43, 0.04);
+  --status-lost-border: rgba(192, 57, 43, 0.2);
 }
 
 @media (prefers-color-scheme: light) {
@@ -27,7 +38,6 @@
     --foreground: #111111;
     --void-red: #c0392b;
     --void-red-glow: rgba(192, 57, 43, 0.3);
-    --void-dim: #e8e8ec;
     --void-border: rgba(0, 0, 0, 0.1);
     --card-bg: rgba(0, 0, 0, 0.02);
     --muted: rgba(0, 0, 0, 0.4);
@@ -79,34 +89,112 @@ body {
   100% { transform: translateX(0); }
 }
 
-.flicker {
-  animation: flicker 6s infinite;
-}
+@layer utilities {
+  .bg-void {
+    background: var(--background);
+  }
 
-.badge-hawkins {
-  color: var(--badge-hawkins-text);
-  border: 1px solid var(--badge-hawkins-border);
-  background: var(--badge-hawkins-bg);
-}
+  .bg-card {
+    background: var(--card-bg);
+  }
 
-.badge-upside {
-  color: var(--badge-upside-text);
-  border: 1px solid var(--badge-upside-border);
-  background: var(--badge-upside-bg);
-}
+  .border-void {
+    border: 1px solid var(--void-border);
+  }
 
-.status-connected {
-  border-color: #27ae60;
-  box-shadow: 0 0 12px rgba(39, 174, 96, 0.3);
-}
+  .border-t-void {
+    border-top: 1px solid var(--void-border);
+  }
 
-.status-interference {
-  border-color: #e67e22;
-  box-shadow: 0 0 12px rgba(230, 126, 34, 0.3);
-  animation: static-noise 0.15s infinite;
-}
+  .text-foreground {
+    color: var(--foreground);
+  }
 
-.status-lost {
-  border-color: var(--void-red);
-  animation: pulse-red 2s ease-in-out infinite;
+  .text-muted {
+    color: var(--muted);
+  }
+
+  .text-muted-value {
+    color: var(--muted-value);
+  }
+
+  .text-muted-body {
+    color: var(--muted-body);
+  }
+
+  .flicker {
+    animation: flicker 6s infinite;
+  }
+
+  .text-shadow-void {
+    text-shadow: 0 0 20px var(--void-border);
+  }
+
+  .badge-hawkins {
+    color: var(--badge-hawkins-text);
+    border: 1px solid var(--badge-hawkins-border);
+    background: var(--badge-hawkins-bg);
+  }
+
+  .badge-upside {
+    color: var(--badge-upside-text);
+    border: 1px solid var(--badge-upside-border);
+    background: var(--badge-upside-bg);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--btn-border);
+    color: var(--btn-color);
+  }
+
+  .status-connected {
+    border-color: var(--status-connected-color);
+    box-shadow: 0 0 12px var(--status-connected-glow);
+  }
+
+  .status-interference {
+    border-color: var(--status-interference-color);
+    box-shadow: 0 0 12px var(--status-interference-glow);
+    animation: static-noise 0.15s infinite;
+  }
+
+  .status-lost {
+    border-color: var(--void-red);
+    animation: pulse-red 2s ease-in-out infinite;
+  }
+
+  .outcome-connected {
+    background: var(--status-connected-bg);
+    border: 1px solid var(--status-connected-border);
+  }
+
+  .outcome-interference {
+    background: var(--status-interference-bg);
+    border: 1px solid var(--status-interference-border);
+  }
+
+  .outcome-lost {
+    background: var(--status-lost-bg);
+    border: 1px solid var(--status-lost-border);
+  }
+
+  .text-status-connected {
+    color: var(--status-connected-color);
+    text-shadow: 0 0 16px var(--status-connected-glow);
+  }
+
+  .text-status-interference {
+    color: var(--status-interference-color);
+    text-shadow: 0 0 16px var(--status-interference-glow);
+  }
+
+  .text-status-lost {
+    color: var(--status-lost-color);
+    text-shadow: 0 0 16px var(--status-lost-glow);
+  }
+
+  .grayscale-20 {
+    filter: grayscale(20%);
+  }
 }

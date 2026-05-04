@@ -17,20 +17,10 @@ export function TargetCard({
   onFocus,
 }: Props) {
   return (
-    <div
-      className="flex justify-between items-center p-5 w-full"
-      style={{
-        background: 'var(--card-bg)',
-        border: '1px solid var(--void-border)',
-        transition: 'border-color 0.2s',
-      }}
-    >
+    <div className="flex justify-between items-center p-5 w-full bg-card border-void transition-colors duration-200">
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-3">
-          <p
-            className="text-base font-semibold tracking-wide"
-            style={{ color: 'var(--foreground)' }}
-          >
+          <p className="text-base font-semibold tracking-wide text-foreground">
             {name}
           </p>
           <span
@@ -46,17 +36,11 @@ export function TargetCard({
           </span>
         </div>
         <div className="flex gap-6">
-          <p className="text-xs" style={{ color: 'var(--muted-value)' }}>
-            Signal{' '}
-            <span className="font-mono" style={{ color: 'var(--foreground)' }}>
-              {signalClarity}
-            </span>
+          <p className="text-xs text-muted-value">
+            Signal <span className="font-mono text-foreground">{signalClarity}</span>
           </p>
-          <p className="text-xs" style={{ color: 'var(--muted-value)' }}>
-            Duration{' '}
-            <span className="font-mono" style={{ color: 'var(--foreground)' }}>
-              {sessionDuration}
-            </span>
+          <p className="text-xs text-muted-value">
+            Duration <span className="font-mono text-foreground">{sessionDuration}</span>
           </p>
         </div>
       </div>
