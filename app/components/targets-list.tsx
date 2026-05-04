@@ -8,6 +8,7 @@ import { ConnectionStatus } from '../service/targets-service';
 export type IFocusedTarget = {
   name: string;
   imageUrl: string;
+  lastKnownLocation: string;
   connectionStatus: {
     message: string;
     status: ConnectionStatus;
@@ -44,6 +45,7 @@ export function TargetsList() {
             setFocusedTarget({
               imageUrl: target.targetImage,
               name: target.name,
+              lastKnownLocation: target.lastKnownLocation,
               connectionStatus: target.connectionStatus,
             })
           }

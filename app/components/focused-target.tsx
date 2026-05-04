@@ -107,6 +107,14 @@ export function FocusedTarget({ target, onRelease }: Props) {
         <p className="text-sm" style={{ color: 'var(--muted-body)', lineHeight: 1.7 }}>
           {target.connectionStatus.message}
         </p>
+        {target.connectionStatus.status === 'Connected' && (
+          <p className="text-xs uppercase tracking-widest" style={{ color: 'var(--muted)', letterSpacing: '0.2em' }}>
+            Location{' '}
+            <span className="font-mono" style={{ color: 'var(--foreground)' }}>
+              {target.lastKnownLocation}
+            </span>
+          </p>
+        )}
       </div>
 
       <Button onClick={onRelease}>
