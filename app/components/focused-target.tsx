@@ -42,20 +42,24 @@ function getStatusConfig(status: ConnectionStatus): StatusConfig {
   };
 }
 
-export function FocusedTarget({ target, onRelease }: Props) {
-  const config = getStatusConfig(target.connectionStatus.status);
+export function FocusedTarget(props: Props) {
+  const config = getStatusConfig(props.target.connectionStatus.status);
 
   return (
     <div className="flex flex-col gap-8 w-full">
       <p className="text-sm tracking-widest uppercase text-muted">
         Eleven connects to{' '}
-        <span className="font-semibold text-foreground">{target.name}</span>
+        <span className="font-semibold text-foreground">
+          {props.target.name}
+        </span>
         <span className="text-muted">...</span>
       </p>
 
       <div className="flex gap-12 items-center">
         <div className="flex flex-col items-center gap-2">
-          <div className={`${config.avatarClassName} rounded-sm overflow-hidden border-2`}>
+          <div
+            className={`${config.avatarClassName} rounded-sm overflow-hidden border-2`}
+          >
             <Image
               alt="Eleven"
               src="/profiles/eleven.png"
@@ -64,43 +68,60 @@ export function FocusedTarget({ target, onRelease }: Props) {
               className="block grayscale-20"
             />
           </div>
-          <span className="text-xs uppercase tracking-widest text-muted">Eleven</span>
+          <span className="text-xs uppercase tracking-widest text-muted">
+            Eleven
+          </span>
         </div>
 
         <div className="flex flex-col items-center gap-1">
-          <span className="text-lg font-mono text-muted opacity-50 tracking-widest">···</span>
-          <span className="text-xs uppercase tracking-widest text-muted opacity-50">link</span>
+          <span className="text-lg font-mono text-muted opacity-50 tracking-widest">
+            ···
+          </span>
+          <span className="text-xs uppercase tracking-widest text-muted opacity-50">
+            link
+          </span>
         </div>
 
         <div className="flex flex-col items-center gap-2">
-          <div className={`${config.avatarClassName} rounded-sm overflow-hidden border-2`}>
+          <div
+            className={`${config.avatarClassName} rounded-sm overflow-hidden border-2`}
+          >
             <Image
-              alt={target.name}
-              src={target.imageUrl}
+              alt={props.target.name}
+              src={props.target.imageUrl}
               width={140}
               height={140}
               className="block grayscale-20"
             />
           </div>
-          <span className="text-xs uppercase tracking-widest text-muted">{target.name}</span>
+          <span className="text-xs uppercase tracking-widest text-muted">
+            {props.target.name}
+          </span>
         </div>
       </div>
 
-      <div className={`${config.outcomeClassName} flex flex-col gap-3 px-6 py-5 rounded-sm w-full`}>
-        <h2 className={`${config.headingClassName} text-2xl font-bold uppercase tracking-widest`}>
+      <div
+        className={`${config.outcomeClassName} flex flex-col gap-3 px-6 py-5 rounded-sm w-full`}
+      >
+        <h2
+          className={`${config.headingClassName} text-2xl font-bold uppercase tracking-widest`}
+        >
           {config.heading}
         </h2>
         <p className="text-sm text-muted-body leading-relaxed">
-          {target.connectionStatus.message}
+          {props.target.connectionStatus.message}
         </p>
-        {target.connectionStatus.status === 'Connected' && (
+        {props.target.connectionStatus.status === 'Connected' && (
           <p className="text-xs uppercase tracking-widest text-muted">
-            Location <span className="font-mono text-foreground">{target.lastKnownLocation}</span>
+            Location{' '}
+            <span className="font-mono text-foreground">
+              {props.target.lastKnownLocation}
+            </span>
           </p>
         )}
       </div>
 
-      <Button onClick={onRelease}>Release</Button>
+      <Button onClick={props.onRelease}>Release</Button>
     </div>
   );
 }

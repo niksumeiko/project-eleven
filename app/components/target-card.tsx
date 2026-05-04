@@ -9,42 +9,42 @@ type Props = {
   onFocus: VoidFunction;
 };
 
-export function TargetCard({
-  name,
-  sessionDuration,
-  signalClarity,
-  dimension,
-  onFocus,
-}: Props) {
+export function TargetCard(props: Props) {
   return (
     <div className="flex justify-between items-center p-5 w-full bg-card border-void transition-colors duration-200">
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-3">
           <p className="text-base font-semibold tracking-wide text-foreground">
-            {name}
+            {props.name}
           </p>
           <span
             className={cx(
               'px-2 py-0.5 text-xs font-semibold uppercase tracking-widest',
               {
-                'badge-upside': dimension.value === 'upside_down',
-                'badge-hawkins': dimension.value === 'hawkins',
+                'badge-upside': props.dimension.value === 'upside_down',
+                'badge-hawkins': props.dimension.value === 'hawkins',
               },
             )}
           >
-            {dimension.label}
+            {props.dimension.label}
           </span>
         </div>
         <div className="flex gap-6">
           <p className="text-xs text-muted-value">
-            Signal <span className="font-mono text-foreground">{signalClarity}</span>
+            Signal{' '}
+            <span className="font-mono text-foreground">
+              {props.signalClarity}
+            </span>
           </p>
           <p className="text-xs text-muted-value">
-            Duration <span className="font-mono text-foreground">{sessionDuration}</span>
+            Duration{' '}
+            <span className="font-mono text-foreground">
+              {props.sessionDuration}
+            </span>
           </p>
         </div>
       </div>
-      <Button onClick={onFocus}>Focus</Button>
+      <Button onClick={props.onFocus}>Focus</Button>
     </div>
   );
 }
