@@ -1,3 +1,4 @@
+import cx from 'classnames';
 import Image from 'next/image';
 import { Button } from './ui/button';
 import { IFocusedTarget } from './targets-list';
@@ -57,9 +58,7 @@ export function FocusedTarget(props: Props) {
 
       <div className="flex gap-12 items-center">
         <div className="flex flex-col items-center gap-2">
-          <div
-            className={`${config.avatarClassName} rounded-sm overflow-hidden border-2`}
-          >
+          <div className={cx('rounded-sm overflow-hidden border-2', config.avatarClassName)}>
             <Image
               alt="Eleven"
               src="/profiles/eleven.png"
@@ -83,9 +82,7 @@ export function FocusedTarget(props: Props) {
         </div>
 
         <div className="flex flex-col items-center gap-2">
-          <div
-            className={`${config.avatarClassName} rounded-sm overflow-hidden border-2`}
-          >
+          <div className={cx('rounded-sm overflow-hidden border-2', config.avatarClassName)}>
             <Image
               alt={props.target.name}
               src={props.target.imageUrl}
@@ -100,12 +97,8 @@ export function FocusedTarget(props: Props) {
         </div>
       </div>
 
-      <div
-        className={`${config.outcomeClassName} flex flex-col gap-3 px-6 py-5 rounded-sm w-full`}
-      >
-        <h2
-          className={`${config.headingClassName} text-2xl font-bold uppercase tracking-widest`}
-        >
+      <div className={cx('flex flex-col gap-3 px-6 py-5 rounded-sm w-full', config.outcomeClassName)}>
+        <h2 className={cx('text-2xl font-bold uppercase tracking-widest', config.headingClassName)}>
           {config.heading}
         </h2>
         <p className="text-sm text-muted-body leading-relaxed">
