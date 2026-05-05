@@ -98,23 +98,23 @@ export function FocusedTarget(props: Props) {
       </div>
 
       <div className={cx('flex flex-col gap-3 px-6 py-5 rounded-sm w-full', config.outcomeClassName)}>
-        <h2 className={cx('text-2xl font-bold uppercase tracking-widest', config.headingClassName)}>
+        <h2 data-testid="outcome-heading" className={cx('text-2xl font-bold uppercase tracking-widest', config.headingClassName)}>
           {config.heading}
         </h2>
-        <p className="text-sm text-muted-body leading-relaxed">
+        <p data-testid="outcome-message" className="text-sm text-muted-body leading-relaxed">
           {props.target.connectionStatus.message}
         </p>
         {props.target.connectionStatus.status === 'Connected' && (
           <p className="text-xs uppercase tracking-widest text-muted">
             Location{' '}
-            <span className="font-mono text-foreground">
+            <span data-testid="outcome-location" className="font-mono text-foreground">
               {props.target.lastKnownLocation}
             </span>
           </p>
         )}
       </div>
 
-      <Button onClick={props.onRelease}>Release</Button>
+      <Button data-testid="release-button" onClick={props.onRelease}>Release</Button>
     </div>
   );
 }
