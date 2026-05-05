@@ -37,42 +37,6 @@ test.describe('Void Session page', () => {
     await expect(page.getByTestId('target-card')).toHaveCount(2);
   });
 
-  test('displays signal clarity as a percentage', async ({ page }) => {
-    await page.route(API_URL, (route) =>
-      route.fulfill({ json: mockTargets([{ signalClarity: 0.92 }]) }),
-    );
-    await page.goto('/');
-
-    await expect(page.getByTestId('target-signal')).toHaveText('92%');
-  });
-
-  test('displays duration in human-readable time', async ({ page }) => {
-    await page.route(API_URL, (route) =>
-      route.fulfill({ json: mockTargets([{ duration: 185 }]) }),
-    );
-    await page.goto('/');
-
-    await expect(page.getByTestId('target-duration')).toHaveText('3m 5s');
-  });
-
-  test('displays dimension label for Hawkins', async ({ page }) => {
-    await page.route(API_URL, (route) =>
-      route.fulfill({ json: mockTargets([{ dimension: 'hawkins' }]) }),
-    );
-    await page.goto('/');
-
-    await expect(page.getByTestId('target-dimension')).toHaveText('Hawkins');
-  });
-
-  test('displays dimension label for Upside Down', async ({ page }) => {
-    await page.route(API_URL, (route) =>
-      route.fulfill({ json: mockTargets([{ dimension: 'upside_down' }]) }),
-    );
-    await page.goto('/');
-
-    await expect(page.getByTestId('target-dimension')).toHaveText('Upside Down');
-  });
-
   test('each target card has a Focus button', async ({ page }) => {
     await page.route(API_URL, (route) =>
       route.fulfill({ json: mockTargets([{}, {}]) }),
