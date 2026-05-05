@@ -1,8 +1,57 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0f;
+  --foreground: #e8e8f0;
+  --void-red: #c0392b;
+  --void-red-glow: rgba(192, 57, 43, 0.4);
+  --void-border: rgba(255, 255, 255, 0.08);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --muted: rgba(255, 255, 255, 0.3);
+  --muted-value: rgba(255, 255, 255, 0.4);
+  --muted-body: rgba(255, 255, 255, 0.55);
+  --badge-hawkins-text: #34d399;
+  --badge-hawkins-border: rgba(52, 211, 153, 0.3);
+  --badge-hawkins-bg: rgba(52, 211, 153, 0.08);
+  --badge-upside-text: #f87171;
+  --badge-upside-border: rgba(239, 68, 68, 0.3);
+  --badge-upside-bg: rgba(239, 68, 68, 0.08);
+  --btn-border: rgba(255, 255, 255, 0.2);
+  --btn-color: rgba(255, 255, 255, 0.7);
+  --status-connected-color: #27ae60;
+  --status-connected-glow: rgba(39, 174, 96, 0.5);
+  --status-connected-bg: rgba(39, 174, 96, 0.04);
+  --status-connected-border: rgba(39, 174, 96, 0.2);
+  --status-interference-color: #e67e22;
+  --status-interference-glow: rgba(230, 126, 34, 0.5);
+  --status-interference-bg: rgba(230, 126, 34, 0.04);
+  --status-interference-border: rgba(230, 126, 34, 0.2);
+  --status-lost-color: #c0392b;
+  --status-lost-glow: rgba(192, 57, 43, 0.6);
+  --status-lost-bg: rgba(192, 57, 43, 0.04);
+  --status-lost-border: rgba(192, 57, 43, 0.2);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #f5f5f7;
+    --foreground: #111111;
+    --void-red: #c0392b;
+    --void-red-glow: rgba(192, 57, 43, 0.3);
+    --void-border: rgba(0, 0, 0, 0.1);
+    --card-bg: rgba(0, 0, 0, 0.02);
+    --muted: rgba(0, 0, 0, 0.4);
+    --muted-value: rgba(0, 0, 0, 0.5);
+    --muted-body: rgba(0, 0, 0, 0.6);
+    --badge-hawkins-text: #166534;
+    --badge-hawkins-border: rgba(22, 101, 52, 0.3);
+    --badge-hawkins-bg: rgba(22, 101, 52, 0.06);
+    --badge-upside-text: #991b1b;
+    --badge-upside-border: rgba(153, 27, 27, 0.3);
+    --badge-upside-bg: rgba(153, 27, 27, 0.06);
+    --btn-border: rgba(0, 0, 0, 0.2);
+    --btn-color: rgba(0, 0, 0, 0.7);
+  }
 }
 
 @theme inline {
@@ -12,15 +61,140 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.6; }
+  94% { opacity: 1; }
+  96% { opacity: 0.7; }
+  97% { opacity: 1; }
+}
+
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 8px var(--void-red-glow); }
+  50% { box-shadow: 0 0 20px var(--void-red-glow), 0 0 40px var(--void-red-glow); }
+}
+
+@keyframes static-noise {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-1px); }
+  50% { transform: translateX(1px); }
+  75% { transform: translateX(-0.5px); }
+  100% { transform: translateX(0); }
+}
+
+@layer utilities {
+  .bg-void {
+    background: var(--background);
+  }
+
+  .bg-card {
+    background: var(--card-bg);
+  }
+
+  .border-void {
+    border: 1px solid var(--void-border);
+  }
+
+  .border-t-void {
+    border-top: 1px solid var(--void-border);
+  }
+
+  .text-foreground {
+    color: var(--foreground);
+  }
+
+  .text-muted {
+    color: var(--muted);
+  }
+
+  .text-muted-value {
+    color: var(--muted-value);
+  }
+
+  .text-muted-body {
+    color: var(--muted-body);
+  }
+
+  .flicker {
+    animation: flicker 6s infinite;
+  }
+
+  .text-shadow-void {
+    text-shadow: 0 0 20px var(--void-border);
+  }
+
+  .badge-hawkins {
+    color: var(--badge-hawkins-text);
+    border: 1px solid var(--badge-hawkins-border);
+    background: var(--badge-hawkins-bg);
+  }
+
+  .badge-upside {
+    color: var(--badge-upside-text);
+    border: 1px solid var(--badge-upside-border);
+    background: var(--badge-upside-bg);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--btn-border);
+    color: var(--btn-color);
+  }
+
+  .status-connected {
+    border-color: var(--status-connected-color);
+    box-shadow: 0 0 12px var(--status-connected-glow);
+  }
+
+  .status-interference {
+    border-color: var(--status-interference-color);
+    box-shadow: 0 0 12px var(--status-interference-glow);
+    animation: static-noise 0.15s infinite;
+  }
+
+  .status-lost {
+    border-color: var(--void-red);
+    animation: pulse-red 2s ease-in-out infinite;
+  }
+
+  .outcome-connected {
+    background: var(--status-connected-bg);
+    border: 1px solid var(--status-connected-border);
+  }
+
+  .outcome-interference {
+    background: var(--status-interference-bg);
+    border: 1px solid var(--status-interference-border);
+  }
+
+  .outcome-lost {
+    background: var(--status-lost-bg);
+    border: 1px solid var(--status-lost-border);
+  }
+
+  .text-status-connected {
+    color: var(--status-connected-color);
+    text-shadow: 0 0 16px var(--status-connected-glow);
+  }
+
+  .text-status-interference {
+    color: var(--status-interference-color);
+    text-shadow: 0 0 16px var(--status-interference-glow);
+  }
+
+  .text-status-lost {
+    color: var(--status-lost-color);
+    text-shadow: 0 0 16px var(--status-lost-glow);
+  }
+
+  .grayscale-20 {
+    filter: grayscale(20%);
+  }
 }
