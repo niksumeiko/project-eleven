@@ -2,6 +2,7 @@ import { afterAll, afterEach, beforeAll, expect, test } from 'vitest';
 import { http, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 import { fetchTargets } from '../targets.adapter';
+import { Target } from '../../domain/target';
 
 const server = setupServer();
 
@@ -10,7 +11,7 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 test('returns the list of targets when the request succeeds', async () => {
-  const targets = [
+  const targets: Target[] = [
     {
       id: 'st-001',
       name: 'Mike Wheeler',
