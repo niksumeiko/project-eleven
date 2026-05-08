@@ -51,8 +51,8 @@ function toVoidSessionOutcome(target: Target): VoidSessionViewModel {
   }
 
   return {
-    heading: 'Lost',
-    copy: 'Connection severed. Eleven needs to rest.',
+    heading: 'Interference',
+    copy: 'Something is blocking the signal. The Upside Down is interfering.',
   };
 }
 
