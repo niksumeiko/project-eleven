@@ -24,14 +24,20 @@ test('maps an array of targets to their view models', () => {
 
   expect(toTargetsViewModel(targets)).toEqual([
     {
+      id: 'st-001',
+      name: 'Mike Wheeler',
       signalClarity: '92%',
       duration: '3m 5s',
       dimension: 'Hawkins',
+      lastKnownLocation: 'Wheeler residence, Maple Street',
     },
     {
+      id: 'st-002',
+      name: 'Will Byers',
       signalClarity: '76%',
       duration: '0m 45s',
       dimension: 'Upside Down',
+      lastKnownLocation: 'Unknown',
     },
   ]);
 });
