@@ -1,16 +1,22 @@
 import type { Target } from '../domain/target';
 
 export type TargetViewModel = {
+  id: string;
+  name: string;
   signalClarity: string;
   duration: string;
   dimension: string;
+  lastKnownLocation: string;
 };
 
 export function toTargetsViewModel(targets: Target[]): TargetViewModel[] {
   return targets.map((target) => ({
+    id: target.id,
+    name: target.name,
     signalClarity: `${Math.round(target.signalClarity * 100)}%`,
     duration: formatDuration(target.duration),
     dimension: formatDimension(target.dimension),
+    lastKnownLocation: target.lastKnownLocation,
   }));
 }
 
