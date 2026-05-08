@@ -105,4 +105,22 @@ describe('void session outcome', () => {
       lastKnownLocation: 'Wheeler residence, Maple Street',
     });
   });
+
+  test('returns Interference when neither Lost nor Connected conditions are met', () => {
+    const targets: Target[] = [
+      {
+        id: 'st-001',
+        name: 'Lucas Sinclair',
+        signalClarity: 0.79,
+        duration: 310,
+        dimension: 'hawkins',
+        lastKnownLocation: 'Hawkins Middle School',
+      },
+    ];
+
+    expect(toTargetsViewModel(targets, 'st-001')).toEqual({
+      heading: 'Interference',
+      copy: 'Something is blocking the signal. The Upside Down is interfering.',
+    });
+  });
 });
