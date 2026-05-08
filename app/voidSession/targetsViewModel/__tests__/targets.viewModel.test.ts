@@ -68,4 +68,41 @@ describe('void session outcome', () => {
       copy: 'Connection severed. Eleven needs to rest.',
     });
   });
+
+  test('returns Lost when duration exceeds 1200 seconds', () => {
+    const targets: Target[] = [
+      {
+        id: 'st-001',
+        name: 'Will Byers',
+        signalClarity: 0.85,
+        duration: 1201,
+        dimension: 'hawkins',
+        lastKnownLocation: 'Castle Byers',
+      },
+    ];
+
+    expect(toTargetsViewModel(targets, 'st-001')).toEqual({
+      heading: 'Lost',
+      copy: 'Connection severed. Eleven needs to rest.',
+    });
+  });
+
+  test('returns Connected when signal clarity is at least 0.8 and dimension is hawkins', () => {
+    const targets: Target[] = [
+      {
+        id: 'st-001',
+        name: 'Mike Wheeler',
+        signalClarity: 0.8,
+        duration: 185,
+        dimension: 'hawkins',
+        lastKnownLocation: 'Wheeler residence, Maple Street',
+      },
+    ];
+
+    expect(toTargetsViewModel(targets, 'st-001')).toEqual({
+      heading: 'Connected',
+      copy: 'Target located. Signal is strong.',
+      lastKnownLocation: 'Wheeler residence, Maple Street',
+    });
+  });
 });
