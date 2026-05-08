@@ -7,6 +7,7 @@ import { toTargetsViewModel } from './voidSession/targetsViewModel/targets.viewM
 
 export default function Home() {
   const [targets, setTargets] = useState<Target[]>([]);
+  const [selectedTargetId, setSelectedTargetId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchTargets().then(setTargets);
@@ -25,7 +26,7 @@ export default function Home() {
               <p>Signal clarity: {vm.signalClarity}</p>
               <p>Duration: {vm.duration}</p>
               <p>{vm.dimension}</p>
-              <button type="button">Focus</button>
+              <button type="button" onClick={() => setSelectedTargetId(vm.id)}>Focus</button>
             </li>
           ))}
         </ul>
