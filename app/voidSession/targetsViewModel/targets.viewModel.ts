@@ -9,7 +9,21 @@ export type TargetViewModel = {
   lastKnownLocation: string;
 };
 
-export function toTargetsViewModel(targets: Target[]): TargetViewModel[] {
+export type VoidSessionViewModel = {
+  heading: string;
+  copy: string;
+  lastKnownLocation?: string;
+};
+
+export function toTargetsViewModel(
+  targets: Target[],
+  selectedTargetId?: string,
+): TargetViewModel[] | VoidSessionViewModel {
+  if (selectedTargetId) {
+    const target = targets.find((t) => t.id === selectedTargetId)!;
+    return toVoidSessionOutcome(target);
+  }
+
   return targets.map((target) => ({
     id: target.id,
     name: target.name,
@@ -18,6 +32,13 @@ export function toTargetsViewModel(targets: Target[]): TargetViewModel[] {
     dimension: formatDimension(target.dimension),
     lastKnownLocation: target.lastKnownLocation,
   }));
+}
+
+function toVoidSessionOutcome(target: Target): VoidSessionViewModel {
+  return {
+    heading: 'Lost',
+    copy: 'Connection severed. Eleven needs to rest.',
+  };
 }
 
 function formatDuration(seconds: number): string {
