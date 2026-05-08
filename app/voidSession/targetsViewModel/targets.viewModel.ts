@@ -35,6 +35,21 @@ export function toTargetsViewModel(
 }
 
 function toVoidSessionOutcome(target: Target): VoidSessionViewModel {
+  if (target.signalClarity < 0.3 || target.duration > 1200) {
+    return {
+      heading: 'Lost',
+      copy: 'Connection severed. Eleven needs to rest.',
+    };
+  }
+
+  if (target.signalClarity >= 0.8 && target.dimension === 'hawkins') {
+    return {
+      heading: 'Connected',
+      copy: 'Target located. Signal is strong.',
+      lastKnownLocation: target.lastKnownLocation,
+    };
+  }
+
   return {
     heading: 'Lost',
     copy: 'Connection severed. Eleven needs to rest.',
