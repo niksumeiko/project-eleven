@@ -1,24 +1,9 @@
 import type { Target } from '../domain/target';
 
-export type TargetViewModel = {
-  id: string;
-  name: string;
-  signalClarity: string;
-  duration: string;
-  dimension: string;
-  lastKnownLocation: string;
-};
-
-export type VoidSessionViewModel = {
-  heading: string;
-  copy: string;
-  lastKnownLocation?: string;
-};
-
 export function toTargetsViewModel(
   targets: Target[],
   selectedTargetId?: string,
-): TargetViewModel[] | VoidSessionViewModel {
+) {
   if (selectedTargetId) {
     const target = targets.find((t) => t.id === selectedTargetId)!;
     return toVoidSessionOutcome(target);
@@ -34,7 +19,7 @@ export function toTargetsViewModel(
   }));
 }
 
-function toVoidSessionOutcome(target: Target): VoidSessionViewModel {
+function toVoidSessionOutcome(target: Target) {
   if (target.signalClarity < 0.3 || target.duration > 1200) {
     return {
       heading: 'Lost',

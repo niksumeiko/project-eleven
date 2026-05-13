@@ -3,23 +3,18 @@
 import { useEffect, useState } from 'react';
 import type { Target } from './voidSession/domain/target';
 import { fetchTargets } from './voidSession/targetsClient/targets.adapter';
-import {
-  toTargetsViewModel,
-  type TargetViewModel,
-  type VoidSessionViewModel,
-} from './voidSession/targetsViewModel/targets.viewModel';
+import { toTargetsViewModel } from './voidSession/targetsViewModel/targets.viewModel';
 
 export default function Home() {
   const [targets, setTargets] = useState<Target[]>([]);
-  const [selectedTargetId, setSelectedTargetId] = useState<string | null>(null);
+  const [selectedTargetId, setSelectedTargetId] = useState<
+    string | undefined
+  >();
+  const viewModel = toTargetsViewModel(targets, selectedTargetId);
 
   useEffect(() => {
     fetchTargets().then(setTargets);
   }, []);
-
-  const viewModel = selectedTargetId
-    ? (toTargetsViewModel(targets, selectedTargetId) as VoidSessionViewModel)
-    : (toTargetsViewModel(targets) as TargetViewModel[]);
 
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
@@ -33,7 +28,12 @@ export default function Home() {
                 <p>Signal clarity: {vm.signalClarity}</p>
                 <p>Duration: {vm.duration}</p>
                 <p>{vm.dimension}</p>
-                <button type="button" onClick={() => setSelectedTargetId(vm.id)}>Focus</button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedTargetId(vm.id)}
+                >
+                  Focus
+                </button>
               </li>
             ))}
           </ul>
@@ -41,8 +41,15 @@ export default function Home() {
           <div>
             <h2>{viewModel.heading}</h2>
             <p>{viewModel.copy}</p>
-            {viewModel.lastKnownLocation && <p>{viewModel.lastKnownLocation}</p>}
-            <button type="button" onClick={() => setSelectedTargetId(null)}>Release</button>
+            {viewModel.lastKnownLocation && (
+              <p>{viewModel.lastKnownLocation}</p>
+            )}
+            <button
+              type="button"
+              onClick={() => setSelectedTargetId(undefined)}
+            >
+              Release
+            </button>
           </div>
         )}
       </main>
